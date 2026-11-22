@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Konten 3D Otomatis — Marketers</title>
+<style>
+  :root{
+    --bg:#0b1020; --panel:#131a30; --panel2:#182238; --line:#263355;
+    --txt:#e8ecf8; --muted:#9aa7c7; --acc:#6c5cff; --acc2:#00c2a8;
+    --warn:#ffb020; --bad:#ff5c7a; --ok:#2fd27d;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif;background:var(--bg);color:var(--txt)}
+  a{color:#9db4ff}
+  header{background:linear-gradient(120deg,#1b2450,#3b2d8f 55%,#0b6e5f);padding:28px 20px 22px}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+  header h1{margin:0 0 6px;font-size:26px}
+  header p{margin:0;color:#cfd8ff;max-width:720px;line-height:1.5}
+  .links{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px}
+  .links a{background:rgba(255,255,255,.12);color:#fff;text-decoration:none;padding:7px 12px;border-radius:999px;font-size:13px;border:1px solid rgba(255,255,255,.25)}
+  .links a:hover{background:rgba(255,255,255,.22)}
+  .steps{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 4px}
+  .step{flex:1 1 150px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:13px}
+  .step b{display:block;font-size:14px;margin-bottom:2px}
+  .step span{color:var(--muted)}
+  .stats{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+  .stat{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:10px 16px;font-size:13px;color:var(--muted)}
+  .stat b{color:var(--txt);font-size:18px;display:block}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin:14px 0}
+  .card h2{margin:0 0 10px;font-size:18px}
+  .card h3{margin:14px 0 8px;font-size:15px}
+  label{font-size:13px;color:var(--muted);display:block;margin:8px 0 4px}
+  input[type=text],textarea,select{width:100%;background:#0d1430;border:1px solid var(--line);color:var(--txt);border-radius:8px;padding:9px 10px;font-size:14px;font-family:inherit}
+  textarea{resize:vertical;min-height:56px}
+  button{background:var(--acc);color:#fff;border:0;border-radius:8px;padding:9px 14px;font-size:14px;cursor:pointer}
+  button:hover{filter:brightness(1.15)}
+  button.ghost{background:transparent;border:1px solid var(--line);color:var(--txt)}
+  button.small{padding:5px 10px;font-size:12px}
+  button.danger{background:transparent;border:1px solid var(--bad);color:var(--bad)}
+  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .badge{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12px;background:#22305a;color:#cdd8ff;border:1px solid var(--line)}
+  .badge.ok{background:#0f3d2a;color:#8ff0bd}
+  .badge.warn{background:#4a3808;color:#ffd97a}
+  .scene{border:1px solid var(--line);border-radius:10px;padding:10px;margin:8px 0;background:#0e1730}
+  .scene .num{font-weight:700;color:var(--acc2)}
+  .postgrid{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+  .post{display:flex;gap:6px;align-items:center;background:#0d1430;border:1px solid var(--line);padding:6px 10px;border-radius:999px;font-size:13px}
+  .muted{color:var(--muted);font-size:13px;line-height:1.55}
+  ol.guide{line-height:1.7;font-size:14px;margin:6px 0;padding-left:20px}
+  .empty{color:var(--muted);text-align:center;padding:22px 0;font-size:14px}
+  footer{color:var(--muted);font-size:12px;text-align:center;padding:24px 0 34px}
+  .proj-head{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:flex-start}
+  .proj-head h3{margin:0;font-size:16px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>🎬 Dashboard Konten 3D Otomatis</h1>
+    <p>Pusat kendali pipeline video 3D gratis: Muse membuat klip &amp; narasi → kamu upload → GitHub Actions merender → video jadi siap posting ke sosial media.</p>
+    <div class="links">
+      <a href="https://github.com/adaadit/muse-ai" target="_blank" rel="noopener">📦 Repo GitHub</a>
+      <a href="https://github.com/adaadit/muse-ai/actions" target="_blank" rel="noopener">⚙️ GitHub Actions (render)</a>
+      <a href="https://github.com/adaadit/muse-ai/tree/main/video/input/clips" target="_blank" rel="noopener">⬆️ Upload klip</a>
+      <a href="https://github.com/adaadit/muse-ai/tree/main/video/input/narration" target="_blank" rel="noopener">⬆️ Upload narasi</a>
+      <a href="https://github.com/adaadit/muse-ai/tree/main/video/output" target="_blank" rel="noopener">⬇️ Ambil video jadi</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="steps">
+    <div class="step"><b>1 · Buat klip</b><span>Minta Muse buatkan klip 3D per adegan + narasi di chat.</span></div>
+    <div class="step"><b>2 · Upload</b><span>Klip ke <i>video/input/clips</i>, narasi ke <i>video/input/narration</i>.</span></div>
+    <div class="step"><b>3 · Render</b><span>GitHub Actions otomatis menggabungkan semuanya.</span></div>
+    <div class="step"><b>4 · Video jadi</b><span>Unduh <i>final.mp4</i> dari folder output.</span></div>
+    <div class="step"><b>5 · Posting</b><span>Tandai platform yang sudah diposting di tiap proyek.</span></div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><b id="stTotal">0</b>Total proyek</div>
+    <div class="stat"><b id="stDone">0</b>Video jadi</div>
+    <div class="stat"><b id="stPosted">0</b>Sudah posting</div>
+  </div>
+
+  <div class="card">
+    <h2>➕ Proyek konten baru</h2>
+    <label>Judul proyek</label>
+    <input type="text" id="npTitle" placeholder="cth. Promo Sariayu — seri robot maskot">
+    <label>Tema / keterangan</label>
+    <input type="text" id="npTheme" placeholder="cth. Edukasi skincare, gaya Pixar 3D, durasi ±30 detik">
+    <div class="row" style="margin-top:12px">
+      <button onclick="addProject()">Buat proyek</button>
+      <button class="ghost" onclick="exportJSON()">⬇️ Ekspor data (JSON)</button>
+      <button class="ghost" onclick="document.getElementById('importFile').click()">⬆️ Impor data</button>
+      <input type="file" id="importFile" accept=".json" style="display:none" onchange="importJSON(event)">
+    </div>
+    <p class="muted">Data tersimpan otomatis di browser perangkat ini (localStorage). Gunakan Ekspor untuk cadangan / pindah perangkat.</p>
+  </div>
+
+  <div id="projects"></div>
+
+  <div class="card">
+    <h2>📖 Panduan cepat</h2>
+    <ol class="guide">
+      <li>Buat proyek di atas, lalu tambahkan adegan: isi <b>prompt klip</b> (deskripsi visual adegan) dan <b>teks narasi</b> per adegan.</li>
+      <li>Klik <b>“Salin permintaan untuk Muse”</b> pada proyek, lalu tempel teksnya ke chat Muse — Muse akan membuatkan file klip (.mp4) dan narasi (.mp3) per adegan.</li>
+      <li>Unduh file dari chat, lalu upload ke repo: klip diberi nama <b>01.mp4, 02.mp4, …</b> ke folder <i>video/input/clips/</i>; narasi <b>01.mp3</b> ke <i>video/input/narration/</i>.</li>
+      <li>GitHub Actions merender otomatis (cek tab <b>Actions</b> di repo). Hasilnya muncul sebagai <i>video/output/final.mp4</i>.</li>
+      <li>Perbarui status proyek di sini dan tandai platform yang sudah diposting. Selesai!</li>
+    </ol>
+    <p class="muted">Catatan jujur: pembuatan klip &amp; narasi dilakukan Muse di chat (ada batas jumlah video per permintaan), render dilakukan GitHub Actions (gratis untuk repo publik dalam batas wajar), dan posting ke sosial media saat ini dibantu Muse lewat akunmu yang terhubung — dengan persetujuanmu di tiap posting.</p>
+  </div>
+
+  <footer>Dashboard Konten 3D · Marketers Digital Agency · Pipeline: Muse × GitHub Actions × Vercel</footer>
+</div>
+
+<script>
+const KEY = 'dashboard-konten-3d-v1';
+const STATUSES = ['Draft','Klip dibuat','Di-upload','Render berjalan','Video jadi','Sudah posting'];
+const PLATFORMS = [['instagram','Instagram'],['tiktok','TikTok'],['facebook','Facebook'],['threads','Threads'],['youtube','YouTube']];
+let state = load();
+
+function load(){
+  try{ const s = JSON.parse(localStorage.getItem(KEY)); if(s && Array.isArray(s.projects)) return s; }catch(e){}
+  return { projects: [] };
+}
+function save(){ localStorage.setItem(KEY, JSON.stringify(state)); render(); }
+function uid(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+function addProject(){
+  const t = document.getElementById('npTitle').value.trim();
+  const th = document.getElementById('npTheme').value.trim();
+  if(!t){ alert('Isi judul proyek dulu.'); return; }
+  state.projects.unshift({ id: uid(), title: t, theme: th, status: 'Draft',
+    scenes: [{prompt:'', narration:''}], posting: {} });
+  document.getElementById('npTitle').value=''; document.getElementById('npTheme').value='';
+  save();
+}
+function delProject(id){ if(confirm('Hapus proyek ini?')){ state.projects = state.projects.filter(p=>p.id!==id); save(); } }
+function setStatus(id, v){ const p = find(id); if(p){ p.status = v; save(); } }
+function find(id){ return state.projects.find(p=>p.id===id); }
+function addScene(id){ const p = find(id); if(p){ p.scenes.push({prompt:'', narration:''}); save(); } }
+function delScene(id, i){ const p = find(id); if(p){ p.scenes.splice(i,1); save(); } }
+function updScene(id, i, field, v){ const p = find(id); if(p){ p.scenes[i][field] = v; localStorage.setItem(KEY, JSON.stringify(state)); renderStats(); } }
+function togglePost(id, key){ const p = find(id); if(p){ p.posting[key] = !p.posting[key]; save(); } }
+
+function copyRequest(id){
+  const p = find(id); if(!p) return;
+  let txt = 'Buatkan klip 3D dan narasi untuk proyek "' + p.title + '"' + (p.theme ? ' (' + p.theme + ')' : '') + '.\n';
+  p.scenes.forEach((s,i)=>{
+    txt += '\nAdegan ' + (i+1) + ':\n- Prompt klip: ' + (s.prompt || '(isi deskripsi adegan)') + '\n- Narasi: ' + (s.narration || '(isi teks narasi)');
+  });
+  txt += '\n\nSetelah klip dan narasi jadi, aku akan upload ke repo muse-ai untuk dirender GitHub Actions.';
+  navigator.clipboard.writeText(txt).then(()=>alert('Permintaan tersalin. Tempelkan ke chat Muse.'),
+    ()=>{ prompt('Salin teks ini:', txt); });
+}
+
+function exportJSON(){
+  const blob = new Blob([JSON.stringify(state, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = 'dashboard-konten-3d.json'; a.click();
+  URL.revokeObjectURL(a.href);
+}
+function importJSON(ev){
+  const f = ev.target.files[0]; if(!f) return;
+  const r = new FileReader();
+  r.onload = ()=>{ try{ const s = JSON.parse(r.result); if(Array.isArray(s.projects)){ state = s; save(); alert('Data berhasil diimpor.'); } else alert('Format file tidak dikenal.'); }catch(e){ alert('File tidak valid.'); } };
+  r.readAsText(f);
+}
+
+function renderStats(){
+  document.getElementById('stTotal').textContent = state.projects.length;
+  document.getElementById('stDone').textContent = state.projects.filter(p=>p.status==='Video jadi'||p.status==='Sudah posting').length;
+  document.getElementById('stPosted').textContent = state.projects.filter(p=>p.status==='Sudah posting').length;
+}
+
+function render(){
+  renderStats();
+  const box = document.getElementById('projects');
+  if(!state.projects.length){
+    box.innerHTML = '<div class="card empty">Belum ada proyek. Buat proyek pertamamu di atas 🎬</div>';
+    return;
+  }
+  box.innerHTML = state.projects.map(p=>{
+    const badgeCls = p.status==='Sudah posting' || p.status==='Video jadi' ? 'badge ok' : (p.status==='Render berjalan' ? 'badge warn' : 'badge');
+    const scenes = p.scenes.map((s,i)=>`
+      <div class="scene">
+        <div class="row" style="justify-content:space-between">
+          <span class="num">Adegan ${i+1}</span>
+          <button class="danger small" onclick="delScene('${p.id}',${i})">Hapus adegan</button>
+        </div>
+        <label>Prompt klip 3D</label>
+        <textarea placeholder="cth. Robot maskot 3D melambai di toko kosmetik yang cerah, gaya Pixar" oninput="updScene('${p.id}',${i},'prompt',this.value)">${esc(s.prompt)}</textarea>
+        <label>Teks narasi</label>
+        <textarea placeholder="cth. Halo! Selamat datang di toko kami…" oninput="updScene('${p.id}',${i},'narration',this.value)">${esc(s.narration)}</textarea>
+      </div>`).join('');
+    const posts = PLATFORMS.map(([k,label])=>`
+      <label class="post"><input type="checkbox" ${p.posting[k]?'checked':''} onchange="togglePost('${p.id}','${k}')"> ${label}</label>`).join('');
+    return `
+    <div class="card">
+      <div class="proj-head">
+        <div>
+          <h3>${esc(p.title)}</h3>
+          <div class="muted">${esc(p.theme || '')}</div>
+        </div>
+        <span class="${badgeCls}">${esc(p.status)}</span>
+      </div>
+      <label>Status proyek</label>
+      <select onchange="setStatus('${p.id}', this.value)">
+        ${STATUSES.map(s=>`<option ${s===p.status?'selected':''}>${s}</option>`).join('')}
+      </select>
+      <h3>🎞️ Adegan (${p.scenes.length})</h3>
+      ${scenes}
+      <div class="row">
+        <button class="ghost small" onclick="addScene('${p.id}')">+ Tambah adegan</button>
+        <button class="small" onclick="copyRequest('${p.id}')">📋 Salin permintaan untuk Muse</button>
+      </div>
+      <h3>📣 Posting sosial media</h3>
+      <div class="postgrid">${posts}</div>
+      <div class="row" style="margin-top:14px">
+        <button class="danger small" onclick="delProject('${p.id}')">Hapus proyek</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+render();
+</script>
+</body>
+</html>
