@@ -1,0 +1,9 @@
+PANDUAN UPLOAD KLIP (folder ini: video/input/clips/)
+
+- Upload file klip 3D ke folder ini lewat tombol "Add file > Upload files".
+- Nama file WAJIB urut sesuai adegan: clip_01.mp4, clip_02.mp4, clip_03.mp4, ...
+- Narasi di-upload ke folder video/input/narration/ dengan nama:
+  narration_01.mp3, narration_02.mp3, ...
+- Setiap ada upload baru di folder ini, GitHub Actions otomatis merender
+  video jadi ke video/output/final.mp4.
+- File panduan ini sekaligus menjadi pemicu render percobaan pertama.
