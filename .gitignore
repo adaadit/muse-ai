@@ -1,0 +1,24 @@
+# Rahasia & kredensial — jangan pernah commit
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*secret*
+*token*
+credentials*
+
+# Dependensi & hasil build
+node_modules/
+dist/
+build/
+__pycache__/
+*.pyc
+.venv/
+
+# Sistem & editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log
